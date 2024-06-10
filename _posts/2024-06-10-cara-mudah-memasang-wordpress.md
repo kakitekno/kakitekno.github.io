@@ -186,7 +186,7 @@ http://127.0.0.1/wordpress
 
 **Pilih bahasa pemasangan.**
 
-<img src="/assets/images/blog/wordpress-install/language_installation.png" alt="memilih bahasa" width="60%" height="60%">
+<img src="/assets/images/blog/wordpress-install/language_installation.png" alt="memilih bahasa">
 
 **Tekan Let's Go di halaman mula bagi memulakan pemasangan Wordpress.**
 
@@ -216,4 +216,6 @@ Setelah Wordpress berjaya dipasang, anda kini boleh mengakses Wordpress dengan l
 ```
 http://127.0.0.1/wordpress/wp-admin/
 ```
-<img src="/assets/images/blog/wordpress-install/login.png" alt="db success" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/login.png" alt="db success">
+
+Tahniah, Anda berjaya memasang Wordpress di dalam server Ubuntu anda sendiri. :)
