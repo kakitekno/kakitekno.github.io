@@ -9,7 +9,7 @@ tags: [pentest, tutorial]
 
 ![banner](/assets/images/blog/cara-guna-burpsuite/banner.jpg)
 
-Burp Suite adalah alatan yang tidak asing lagi dalam kalangan Penetration Tester. Burp Suite adalah sebuat alatan komprehensif yang biasa digunakan untuk menguji keselamatan aplikasi web (Web Application). Ianya sering kali diguna pakai untuk mencari dan mengeksploit kelemahan yang ada di dalam web application. 
+Burp Suite adalah alatan yang tidak asing lagi dalam kalangan Penetration Tester. Burp Suite adalah sebuah alatan komprehensif yang biasa digunakan untuk menguji keselamatan aplikasi web (Web Application). Ianya sering kali diguna pakai untuk mencari dan mengeksploit kelemahan yang ada di dalam web application. 
 
 Dalam tutorial ini, saya akan menunjukkan cara-cara untuk menggunakan Burp Suite. Kita boleh memuat turun Burp Suite Community di Windows menggunakan link ini [https://portswigger.net/burp/communitydownload](https://portswigger.net/burp/communitydownload). Anda juga boleh menggunakan Burp Suite yang sedia dipasang di dalam [Kali Linux](https://www.kali.org/docs/introduction/what-is-kali-linux/).
 
@@ -33,8 +33,8 @@ Tekan icon Foxy Proxy di toolbar, dan akan ada beberapa menu yang akan muncul, p
 
 Layar baru akan dibuka dan menunjukkan tetapan Foxy Proxy. Di bahagian pilihan atas, klik "Proxies". Kita akan mengisi beberapa konfigurasi seperti di bawah:
 
-**Title: Burp Suite**
-**Hostname: 127.0.0.1**
+**Title: Burp Suite**<br>
+**Hostname: 127.0.0.1**<br>
 **Port: 8080**
 
 ![foxy_configuration](/assets/images/blog/cara-guna-burpsuite/foxy_configuration.png)
