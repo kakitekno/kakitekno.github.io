@@ -86,23 +86,23 @@ Terdapat beberapa soalan yang perlu dijawab, ikuti langkah di bawah.
 
 <b>1. Kita boleh menukar password atau mengekalkan password asal. Tekan apa apa butang untuk kekalkan password asal.</b>
 
-<img src="/img/posts/install_wordpress/mysql1.png" alt="reset mysql password" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/mysql1.png" alt="reset mysql password" width="80%" height="80%">
 
 <b>2. Tekan "y" untuk membuang anonymous user.</b>
 
-<img src="/img/posts/install_wordpress/mysql2.png" alt="anonymous user" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/mysql2.png" alt="anonymous user" width="80%" height="80%">
 
 <b>3. Tekan "y" untuk menutup akses login root dari rangkaian luar selain localhost. Ini bagi mencegah cubaan akses yang tidak dikehendaki dari luar.</b>
 
-<img src="/img/posts/install_wordpress/mysql3.png" alt="root access" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/mysql3.png" alt="root access" width="80%" height="80%">
 
 <b>4. Tekan "y" untuk membuang database test. Database ini hanyalah untuk menguji samada MySQL berjaya dipasang atau tidak.</b>
 
-<img src="/img/posts/install_wordpress/mysql4.png" alt="database test" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/mysql4.png" alt="database test" width="80%" height="80%">
 
 <b>5. Tekan "y" untuk memuat semula dan mengemaskini privilege tables dalam MySQL.</b>
 
-<img src="/img/posts/install_wordpress/mysql5.png" alt="privilege table" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/mysql5.png" alt="privilege table" width="80%" height="80%">
 
 ## Mencipta pangkalan data Wordpress
 
@@ -186,11 +186,11 @@ http://127.0.0.1/wordpress
 
 **Pilih bahasa pemasangan.**
 
-<img src="/img/posts/install_wordpress/language_installation.png" alt="memilih bahasa" width="60%" height="60%">
+<img src="/assets/images/blog/wordpress-install/language_installation.png" alt="memilih bahasa" width="60%" height="60%">
 
 **Tekan Let's Go di halaman mula bagi memulakan pemasangan Wordpress.**
 
-<img src="/img/posts/install_wordpress/halaman_mula.png" alt="halaman mula" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/halaman_mula.png" alt="halaman mula" width="80%" height="80%">
 
 **Isi maklumat berkaitan database yang telah dikonfigurasi di dalam MySQL.**
 1. Nama Database: wordpress
@@ -199,15 +199,15 @@ http://127.0.0.1/wordpress
 4. Database Host: localhost
 5. Table Prefix: wp_
 
-<img src="/img/posts/install_wordpress/database_details.png" alt="database detail" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/database_details.png" alt="database detail" width="80%" height="80%">
 
 **Gambar di bawah menunjukkan database berjaya dikesan oleh Wordpress, maka kita boleh memulakan installation. Jika database tidak berjaya dikesan, periksa semula konfigurasi yang dimasukkan di halaman sebelum dan di dalam MySQL. Pastikan konfigurasi yang digunakan adalah sama.**
 
-<img src="/img/posts/install_wordpress/database_success.png" alt="db success" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/database_success.png" alt="db success" width="80%" height="80%">
 
 **Isikan maklumat berkenaan website mengikut keinginan anda. Setelah maklumat dimasukkan, Wordpress sudah siap dipasang.**
 
-<img src="/img/posts/install_wordpress/installation.png" alt="db success" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/installation.png" alt="db success" width="80%" height="80%">
 
 ## Mengakses Wordpress
 
@@ -216,4 +216,4 @@ Setelah Wordpress berjaya dipasang, anda kini boleh mengakses Wordpress dengan l
 ```
 http://127.0.0.1/wordpress/wp-admin/
 ```
-<img src="/img/posts/install_wordpress/login.png" alt="db success" width="80%" height="80%">
+<img src="/assets/images/blog/wordpress-install/login.png" alt="db success" width="80%" height="80%">
