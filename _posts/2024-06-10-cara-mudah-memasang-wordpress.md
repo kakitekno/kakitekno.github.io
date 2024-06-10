@@ -34,7 +34,7 @@ sudo apt update && sudo apt upgrade -y
 
 Apache adalah elemen penting dalam Wordpress kerana ia menjadi [HTTP server](https://httpd.apache.org/) yang akan menghidupkan Wordpress. Kita juga perlu mengaktifkan Apache menggunakan command [enable](https://documentation.suse.com/smart/systems-management/html/reference-systemctl-enable-disable-services/index.html) supaya Apache akan start on boot.
 
-```
+```shell
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
@@ -44,13 +44,13 @@ sudo systemctl start apache2
 
 PHP adalah enjin yang akan menggerakkan fungsi fungsi dalaman didalam Wordpress. Jadi penting untuk kita install PHP dengan versi paling baru dan semua perkakasan PHP.
 
-```
+```shell
 sudo apt install php -y
 ```
 
 Component PHP
 
-```
+```shell
 sudo apt install libapache2-mod-php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip -y
 ```
 
@@ -69,17 +69,23 @@ Apa fungsi semua ni?
   <li><b>php-zip: </b>Mengedit ZIP</li>
 </ul> 
 
+Bagi memastikan fungsi PHP ini dikesan oleh Apache, kita boleh restart apache service.
+
+```shell
+sudo systemctl restart apache2
+```
+
 ## Memasang MySQL Server
 
 MySQL adalah pengurus pangkalan data di mana semua data data akan diletakkan di dalam database MySQL. Wordpress memerlukan satu database untuk berfungsi.
 
-```
+```shell
 sudo apt install mysql-server -y
 ```
 
 Setelah memasang MySQL, kita perlu melakukan pemasangat selamat MySQL suupaya ia dapat digunakan dengan baik dan selamat.
 
-```
+```shell
 sudo mysql_secure_installation
 ```
 
@@ -108,32 +114,32 @@ Terdapat beberapa soalan yang perlu dijawab, ikuti langkah di bawah.
 ## Mencipta pangkalan data Wordpress
 
 Setelah melakukan installation MySQL, kita boleh login ke MySQL untuk membuat pangkalan data (database) bagi Wordpress, pengguna (user) Wordpress dan konfigurasi kebenaran kepada database.
-```
+```shell
 sudo mysql -u root -p
 ```
 
 Pertama sekali kita akan membuat sebuah database baharu bernama "wordpress".
-```
+```sql
 CREATE DATABASE wordpress;
 ```
 
 Ciptakan satu pengguna baharu bernama "wp_user" yang akan digunakan bagi mengawal pangkalan data. Ubah 'password' kepada kata laluan yang selamat.
-```
+```sql
 CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'password';
 ```
 
 Kita akan memberikan kebenaran pengguna "wp_user" kepada database wordpress yang telah dicipta sebentar tadi. 
-```
+```sql
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wp_user'@'localhost';
 ```
 
 "Flush Privileges" digunakan untuk mengemas kini privileges tables dalam MySQL.
-```
+```sql
 FLUSH PRIVILEGES;
 ```
 
 Setelah selesai, kita boleh keluar dari MySQL.
-```
+```sql
 EXIT;
 ```
 
@@ -142,46 +148,46 @@ EXIT;
 Setelah kita menyediakan database bagi Wordpress, seterusnya kita akan memuat turun Wordpress bagi dipasang di dalam server.
 
 Kita akan melakukan pemasangan Wordpress di /var/www/html iaitu direktori penggunaan Apache.
-```
+```shell
 cd /var/www/html
 ```
 
 Muat turun pakej Wordpress yang terbaru.
-```
+```shell
 sudo wget http://wordpress.org/latest.tar.gz
 ```
 
 Ekstrak semua fail di dalam latest.tar.gz dan fail-fail tersebut akan diletakkan di dalam direktori bernama wordpress.
-```
+```shell
 sudo tar -xzvf latest.tar.gz
 ```
 
 Kita boleh membuat fail ekstrak setelah selesai mengekstrak semua kandungan di dalamnya.
-```
+```shell
 sudo rm latest.tar.gz
 ```
 
 ## Konfigurasi Fail Wordpress
 
 Cipta direktori muat naik.
-```
+```shell
 sudo mkdir /var/www/html/wordpress/wp-content/uploads
 ```
 
 Mengubah pemilik direktori wordpress.
-```
+```shell
 sudo chown -R www-data:www-data /var/www/html/wordpress/
 ```
 
 Mengubah kebenaran direktori wordpress.
-```
+```shell
 sudo chmod -R 755 /var/www/html/wordpress/
 ```
 
 ## Memasang Wordpress
 
 Setelah selesai konfigurasi fail Wordpress, kita boleh memulakan pemasangan Wordpress. Buka pelayan web (Browser) dan akses halaman Wordpress menggunakan IP address server.
-```
+```URL
 http://127.0.0.1/wordpress
 ```
 
@@ -214,7 +220,7 @@ http://127.0.0.1/wordpress
 
 Setelah Wordpress berjaya dipasang, anda kini boleh mengakses Wordpress dengan log masuk di URL berikut.
 
-```
+```URL
 http://127.0.0.1/wordpress/wp-admin/
 ```
 <img src="/assets/images/blog/wordpress-install/login.png" alt="db success">
