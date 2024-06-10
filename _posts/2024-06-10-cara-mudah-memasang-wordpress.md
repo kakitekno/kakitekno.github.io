@@ -191,15 +191,15 @@ Setelah selesai konfigurasi fail Wordpress, kita boleh memulakan pemasangan Word
 http://127.0.0.1/wordpress
 ```
 
-**Pilih bahasa pemasangan.**
+Pilih bahasa pemasangan.
 
 <img src="/assets/images/blog/wordpress-install/language_installation.png" alt="memilih bahasa">
 
-**Tekan Let's Go di halaman mula bagi memulakan pemasangan Wordpress.**
+Tekan Let's Go di halaman mula bagi memulakan pemasangan Wordpress.
 
 <img src="/assets/images/blog/wordpress-install/halaman_mula.png" alt="halaman mula" width="80%" height="80%">
 
-**Isi maklumat berkaitan database yang telah dikonfigurasi di dalam MySQL.**
+Isi maklumat berkaitan database yang telah dikonfigurasi di dalam MySQL.
 1. Nama Database: wordpress
 2. Nama Pengguna: wp_user
 3. Password: kata laluan yang telah ditetapkan
@@ -208,11 +208,11 @@ http://127.0.0.1/wordpress
 
 <img src="/assets/images/blog/wordpress-install/database_details.png" alt="database detail" width="80%" height="80%">
 
-**Gambar di bawah menunjukkan database berjaya dikesan oleh Wordpress, maka kita boleh memulakan installation. Jika database tidak berjaya dikesan, periksa semula konfigurasi yang dimasukkan di halaman sebelum dan di dalam MySQL. Pastikan konfigurasi yang digunakan adalah sama.**
+Gambar di bawah menunjukkan database berjaya dikesan oleh Wordpress, maka kita boleh memulakan installation. Jika database tidak berjaya dikesan, periksa semula konfigurasi yang dimasukkan di halaman sebelum dan di dalam MySQL. Pastikan konfigurasi yang digunakan adalah sama.
 
 <img src="/assets/images/blog/wordpress-install/database_success.png" alt="db success" width="80%" height="80%">
 
-**Isikan maklumat berkenaan website mengikut keinginan anda. Setelah maklumat dimasukkan, Wordpress sudah siap dipasang.**
+Isikan maklumat berkenaan website mengikut keinginan anda. Setelah maklumat dimasukkan, Wordpress sudah siap dipasang.
 
 <img src="/assets/images/blog/wordpress-install/installation.png" alt="db success" width="80%" height="80%">
 
