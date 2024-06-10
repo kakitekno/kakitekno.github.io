@@ -25,7 +25,8 @@ Anda ingin mempunyai website sendiri menggunakan Wordpress? Tapi tak faham macam
 ## Update dan Upgrade Ubuntu
 
 Pertama sekali, update dahulu Ubuntu server yang akan digunakan untuk install Wordpress. Ini bagi memastikan package yang akan digunakan adalah yang terkini.
-```
+
+```shell
 sudo apt update && sudo apt upgrade -y
 ```
 
