@@ -7,6 +7,8 @@ categories: tutorial
 tags: [pentest, tutorial]
 ---
 
+![banner](/assets/images/blog/cara-guna-burpsuite/banner.jpg)
+
 Burp Suite adalah alatan yang tidak asing lagi dalam kalangan Penetration Tester. Burp Suite adalah sebuat alatan komprehensif yang biasa digunakan untuk menguji keselamatan aplikasi web (Web Application). Ianya sering kali diguna pakai untuk mencari dan mengeksploit kelemahan yang ada di dalam web application. 
 
 Dalam tutorial ini, saya akan menunjukkan cara-cara untuk menggunakan Burp Suite. Kita boleh memuat turun Burp Suite Community di Windows menggunakan link ini [https://portswigger.net/burp/communitydownload](https://portswigger.net/burp/communitydownload). Anda juga boleh menggunakan Burp Suite yang sedia dipasang di dalam [Kali Linux](https://www.kali.org/docs/introduction/what-is-kali-linux/).
