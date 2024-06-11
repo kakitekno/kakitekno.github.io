@@ -57,10 +57,15 @@ Seterusnya, layari atau lakukan request terhadap website yang ingin kita interce
 
 Pada masa ini kita boleh mengedit http request yang cuba dihantar ke web server. Pelbagai perkara yang boleh dilakukan di http header yang sering kali digunakan dalam penetration testing untuk menguji tindak balas website terhadap request yang dihantar.
 
-Jika kita ingin menghantar semula request yang telah di intercept kepada web server, kita hanya perlu menekan butang forward di bahagian atas request box. Terdapat 3 butang utama yang sering digunakan.
+Jika kita ingin menghantar semula request yang telah di intercept kepada web server, kita hanya perlu menekan butang forward di bahagian atas request box. Request akan dihantar ke web server dan data yang dihantar akan diterima oleh web server dan dipaparkan kembali di browser.
+
+![forward_request](/assets/images/blog/cara-guna-burpsuite/forward_req.png)
+
+Selain forward, terdapat 3 butang utama yang sering digunakan.
 
 **Forward: Menyalurkan kembali request ke web server**<br>
 **Drop: Membatalkan penghantaran request ke web server, jadi web server tidak akan menirima data yang dihantar.**<br>
 **Action: Beberapa perkara yang boleh dilakukan kepada request untuk tindakan selanjutnya.**
 
-![forward_request](/assets/images/blog/cara-guna-burpsuite/forward_req.png)
+***
+
