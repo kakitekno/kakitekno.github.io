@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="/jekyll-theme-yat/feed.xml" rel="self" type="application/atom+xml" /><link href="/jekyll-theme-yat/" rel="alternate" type="text/html" /><updated>2024-06-11T16:16:31+00:00</updated><id>/jekyll-theme-yat/feed.xml</id><title type="html">Kaki Tekno</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>Amir Zulkarnain</name></author><entry><title type="html">Cara Mudah Memasang Wordpress Bagi Pemula</title><link href="/jekyll-theme-yat/tutorial/2024/06/10/cara-mudah-memasang-wordpress.html" rel="alternate" type="text/html" title="Cara Mudah Memasang Wordpress Bagi Pemula" /><published>2024-06-10T00:00:00+00:00</published><updated>2024-06-10T00:00:00+00:00</updated><id>/jekyll-theme-yat/tutorial/2024/06/10/cara-mudah-memasang-wordpress</id><content type="html" xml:base="/jekyll-theme-yat/tutorial/2024/06/10/cara-mudah-memasang-wordpress.html"><![CDATA[<p><img src="/assets/images/blog/wordpress-install/wordpress_banner.jpg" alt="banner" /></p>
+
+<p>Anda ingin mempunyai website sendiri menggunakan Wordpress? Tapi tak faham macam mana cara mudah untuk install Wordpress. Dalam tutorial ini, saya akan guide anda untuk install Wordpress dengan cara yang mudah difahami. Tutorial ini menggunakan Ubuntu Server 22.04 (Jammy Jellyfish). Anda juga boleh menggunakan versi Ubuntu atau Debian yang lain dan sewaktu dengannya.</p>
+
+<h1 id="langkah-langkah-untuk-install-wordpress-di-ubuntu-2204">Langkah-langkah untuk install Wordpress di Ubuntu 22.04</h1>
+
+<p><a href="#update-dan-upgrade-ubuntu">1. Update Dan Upgrade Sistem</a><br />
+<a href="#memasang-apache">2. Memasang Apache</a><br />
+<a href="#memasang-php-dan-component">3. Memasang PHP &amp; Component</a><br />
+<a href="#memasang-mysql-server">4. Memasang MySQL Server serta mysql_secure_installation</a><br />
+<a href="#mencipta-pangkalan-data-wordpress">5. Bina DB untuk Wordpress</a><br />
+<a href="#memuat-turun-wordpress">6. Memuat Turun Wordpress</a><br />
+<a href="#konfigurasi-fail-wordpress">7. Konfigurasi Fail Wordpress</a><br />
+<a href="#memasang-wordpress">8. Memasang Wordpress</a><br /></p>
+
+<h2 id="update-dan-upgrade-ubuntu">Update dan Upgrade Ubuntu</h2>
+
+<p>Pertama sekali, update dahulu Ubuntu server yang akan digunakan untuk install Wordpress. Ini bagi memastikan package yang akan digunakan adalah yang terkini.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h2 id="memasang-apache">Memasang Apache</h2>
+
+<p>Apache adalah elemen penting dalam Wordpress kerana ia menjadi <a href="https://httpd.apache.org/">HTTP server</a> yang akan menghidupkan Wordpress. Kita juga perlu mengaktifkan Apache menggunakan command <a href="https://documentation.suse.com/smart/systems-management/html/reference-systemctl-enable-disable-services/index.html">enable</a> supaya Apache akan start on boot.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>apache2 <span class="nt">-y</span>
+<span class="nb">sudo </span>systemctl <span class="nb">enable </span>apache2
+<span class="nb">sudo </span>systemctl start apache2
+</code></pre></div></div>
+
+<h2 id="memasang-php-dan-component">Memasang PHP dan Component</h2>
+
+<p>PHP adalah enjin yang akan menggerakkan fungsi fungsi dalaman didalam Wordpress. Jadi penting untuk kita install PHP dengan versi paling baru dan semua perkakasan PHP.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>php <span class="nt">-y</span>
+</code></pre></div></div>
+
+<p>Component PHP</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>libapache2-mod-php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip <span class="nt">-y</span>
+</code></pre></div></div>
+
+<p>Apa fungsi semua ni?</p>
+
+<ul>
+  <li><b>libapache2-mod-php: </b>Integrasi PHP dan Apache.</li> 
+  <li><b>php-mysql: </b>Integrasi PHP dan MySQL</li>
+  <li><b>php-curl: </b>Digunakan supaya PHP dapat menggunakan curl.</li>
+  <li><b>php-gd: </b>Graphic Library untuk PHP.</li>
+  <li><b>php-mbstring: </b>Mengendalikan bahasa atau huruf yang bukan latin.</li>
+  <li><b>php-xml: </b>XML support untuk PHP</li>
+  <li><b>php-xmlrpc: </b>Support XML untuk (Remote Procedure Call)</li>
+  <li><b>php-soap: </b>Support PHP untuk (Simple Object Access Protocol)</li>
+  <li><b>php-intl: </b>Membantu features internationalization</li>
+  <li><b>php-zip: </b>Mengedit ZIP</li>
+</ul>
+
+<p>Bagi memastikan fungsi PHP ini dikesan oleh Apache, kita boleh restart apache service.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart apache2
+</code></pre></div></div>
+
+<h2 id="memasang-mysql-server">Memasang MySQL Server</h2>
+
+<p>MySQL adalah pengurus pangkalan data di mana semua data data akan diletakkan di dalam database MySQL. Wordpress memerlukan satu database untuk berfungsi.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>mysql-server <span class="nt">-y</span>
+</code></pre></div></div>
+
+<p>Setelah memasang MySQL, kita perlu melakukan pemasangat selamat MySQL suupaya ia dapat digunakan dengan baik dan selamat.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>mysql_secure_installation
+</code></pre></div></div>
+
+<p>Terdapat beberapa soalan yang perlu dijawab, ikuti langkah di bawah.</p>
+
+<p><b>1. Kita boleh menukar password atau mengekalkan password asal. Tekan apa apa butang untuk kekalkan password asal.</b></p>
+
+<p><img src="/assets/images/blog/wordpress-install/mysql1.png" alt="reset mysql password" width="80%" height="80%" /></p>
+
+<p><b>2. Tekan “y” untuk membuang anonymous user.</b></p>
+
+<p><img src="/assets/images/blog/wordpress-install/mysql2.png" alt="anonymous user" width="80%" height="80%" /></p>
+
+<p><b>3. Tekan “y” untuk menutup akses login root dari rangkaian luar selain localhost. Ini bagi mencegah cubaan akses yang tidak dikehendaki dari luar.</b></p>
+
+<p><img src="/assets/images/blog/wordpress-install/mysql3.png" alt="root access" width="80%" height="80%" /></p>
+
+<p><b>4. Tekan “y” untuk membuang database test. Database ini hanyalah untuk menguji samada MySQL berjaya dipasang atau tidak.</b></p>
+
+<p><img src="/assets/images/blog/wordpress-install/mysql4.png" alt="database test" width="80%" height="80%" /></p>
+
+<p><b>5. Tekan “y” untuk memuat semula dan mengemaskini privilege tables dalam MySQL.</b></p>
+
+<p><img src="/assets/images/blog/wordpress-install/mysql5.png" alt="privilege table" width="80%" height="80%" /></p>
+
+<h2 id="mencipta-pangkalan-data-wordpress">Mencipta pangkalan data Wordpress</h2>
+
+<p>Setelah melakukan installation MySQL, kita boleh login ke MySQL untuk membuat pangkalan data (database) bagi Wordpress, pengguna (user) Wordpress dan konfigurasi kebenaran kepada database.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
+
+<p>Pertama sekali kita akan membuat sebuah database baharu bernama “wordpress”.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">wordpress</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Ciptakan satu pengguna baharu bernama “wp_user” yang akan digunakan bagi mengawal pangkalan data. Ubah ‘password’ kepada kata laluan yang selamat.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'wp_user'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Kita akan memberikan kebenaran pengguna “wp_user” kepada database wordpress yang telah dicipta sebentar tadi.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">wordpress</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'wp_user'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>“Flush Privileges” digunakan untuk mengemas kini privileges tables dalam MySQL.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Setelah selesai, kita boleh keluar dari MySQL.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">EXIT</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="memuat-turun-wordpress">Memuat turun Wordpress</h2>
+
+<p>Setelah kita menyediakan database bagi Wordpress, seterusnya kita akan memuat turun Wordpress bagi dipasang di dalam server.</p>
+
+<p>Kita akan melakukan pemasangan Wordpress di /var/www/html iaitu direktori penggunaan Apache.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /var/www/html
+</code></pre></div></div>
+
+<p>Muat turun pakej Wordpress yang terbaru.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>wget http://wordpress.org/latest.tar.gz
+</code></pre></div></div>
+
+<p>Ekstrak semua fail di dalam latest.tar.gz dan fail-fail tersebut akan diletakkan di dalam direktori bernama wordpress.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo tar</span> <span class="nt">-xzvf</span> latest.tar.gz
+</code></pre></div></div>
+
+<p>Kita boleh membuat fail ekstrak setelah selesai mengekstrak semua kandungan di dalamnya.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo rm </span>latest.tar.gz
+</code></pre></div></div>
+
+<h2 id="konfigurasi-fail-wordpress">Konfigurasi Fail Wordpress</h2>
+
+<p>Cipta direktori muat naik.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> /var/www/html/wordpress/wp-content/uploads
+</code></pre></div></div>
+
+<p>Mengubah pemilik direktori wordpress.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chown</span> <span class="nt">-R</span> www-data:www-data /var/www/html/wordpress/
+</code></pre></div></div>
+
+<p>Mengubah kebenaran direktori wordpress.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod</span> <span class="nt">-R</span> 755 /var/www/html/wordpress/
+</code></pre></div></div>
+
+<h2 id="memasang-wordpress">Memasang Wordpress</h2>
+
+<p>Setelah selesai konfigurasi fail Wordpress, kita boleh memulakan pemasangan Wordpress. Buka pelayan web (Browser) dan akses halaman Wordpress menggunakan IP address server.</p>
+<pre><code class="language-URL">http://127.0.0.1/wordpress
+</code></pre>
+
+<p>Pilih bahasa pemasangan.</p>
+
+<p><img src="/assets/images/blog/wordpress-install/language_installation.png" alt="memilih bahasa" /></p>
+
+<p>Tekan Let’s Go di halaman mula bagi memulakan pemasangan Wordpress.</p>
+
+<p><img src="/assets/images/blog/wordpress-install/halaman_mula.png" alt="halaman mula" width="80%" height="80%" /></p>
+
+<p>Isi maklumat berkaitan database yang telah dikonfigurasi di dalam MySQL.</p>
+<ol>
+  <li>Nama Database: wordpress</li>
+  <li>Nama Pengguna: wp_user</li>
+  <li>Password: kata laluan yang telah ditetapkan</li>
+  <li>Database Host: localhost</li>
+  <li>Table Prefix: wp_</li>
+</ol>
+
+<p><img src="/assets/images/blog/wordpress-install/database_details.png" alt="database detail" width="80%" height="80%" /></p>
+
+<p>Gambar di bawah menunjukkan database berjaya dikesan oleh Wordpress, maka kita boleh memulakan installation. Jika database tidak berjaya dikesan, periksa semula konfigurasi yang dimasukkan di halaman sebelum dan di dalam MySQL. Pastikan konfigurasi yang digunakan adalah sama.</p>
+
+<p><img src="/assets/images/blog/wordpress-install/database_success.png" alt="db success" width="80%" height="80%" /></p>
+
+<p>Isikan maklumat berkenaan website mengikut keinginan anda. Setelah maklumat dimasukkan, Wordpress sudah siap dipasang.</p>
+
+<p><img src="/assets/images/blog/wordpress-install/installation.png" alt="db success" width="80%" height="80%" /></p>
+
+<h2 id="mengakses-wordpress">Mengakses Wordpress</h2>
+
+<p>Setelah Wordpress berjaya dipasang, anda kini boleh mengakses Wordpress dengan log masuk di URL berikut.</p>
+
+<pre><code class="language-URL">http://127.0.0.1/wordpress/wp-admin/
+</code></pre>
+<p><img src="/assets/images/blog/wordpress-install/login.png" alt="db success" /></p>
+
+<p>Tahniah, Anda berjaya memasang Wordpress di dalam server Ubuntu anda sendiri. :)</p>]]></content><author><name>Amir Zulkarnain</name></author><category term="tutorial" /><category term="wordpress" /><category term="tutorial" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Belajar Menggunakan Burp Suite</title><link href="/jekyll-theme-yat/tutorial/2024/06/09/burpsuite-untuk-pemula.html" rel="alternate" type="text/html" title="Belajar Menggunakan Burp Suite" /><published>2024-06-09T00:00:00+00:00</published><updated>2024-06-09T00:00:00+00:00</updated><id>/jekyll-theme-yat/tutorial/2024/06/09/burpsuite-untuk-pemula</id><content type="html" xml:base="/jekyll-theme-yat/tutorial/2024/06/09/burpsuite-untuk-pemula.html"><![CDATA[<p><img src="/assets/images/blog/cara-guna-burpsuite/banner.jpg" alt="banner" /></p>
+
+<p>Burp Suite adalah alatan yang tidak asing lagi dalam kalangan Penetration Tester. Burp Suite adalah sebuah alatan komprehensif yang biasa digunakan untuk menguji keselamatan aplikasi web (Web Application). Ianya sering kali diguna pakai untuk mencari dan mengeksploit kelemahan yang ada di dalam web application.</p>
+
+<p>Dalam tutorial ini, saya akan menunjukkan cara-cara untuk menggunakan Burp Suite. Kita boleh memuat turun Burp Suite Community di Windows menggunakan link ini <a href="https://portswigger.net/burp/communitydownload">https://portswigger.net/burp/communitydownload</a>. Anda juga boleh menggunakan Burp Suite yang sedia dipasang di dalam <a href="https://www.kali.org/docs/introduction/what-is-kali-linux/">Kali Linux</a>.</p>
+
+<h1 id="memasang-foxy-proxy-di-dalam-browser">Memasang Foxy Proxy Di Dalam Browser</h1>
+
+<p>Burp Suite boleh digunakan dengan 2 kaedah iaitu menggunakan browser yang telah disediakan di dalam Burp Suite, atau menggunakan browser sendiri. Saya akan menunjukkan cara untuk menggunakan browser sendiri. Pertama, kita akan memuat turun extension browser bernama Foxy Proxy Standard.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/google_foxy_proxy.png" alt="google_foxy_proxy" /></p>
+
+<p>Tutorial ini menggunakan Mozilla Firefox, jadi anda boleh memuat turun Foxy Proxy mengikut browser anda.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/add_to_firefox.png" alt="add_to_firefox" /></p>
+
+<p>Bagi memudahkan akses ke Foxy Proxy, tambahkan Foxy Proxy ke toolbar, jadi Foxy Proxy akan sentiasa berada di atas toolbar.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/pin_to_toolbar.png" alt="pin_to_toolbar" /></p>
+
+<p>Tekan icon Foxy Proxy di toolbar, dan akan ada beberapa menu yang akan muncul, pilih “Options” untuk kita memulakan konfigurasi Foxy Proxy.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/foxy_options.png" alt="foxy_options" /></p>
+
+<p>Layar baru akan dibuka dan menunjukkan tetapan Foxy Proxy. Di bahagian pilihan atas, klik “Proxies”. Kita akan mengisi beberapa konfigurasi seperti di bawah:</p>
+
+<p><strong>Title: Burp Suite</strong><br />
+<strong>Hostname: 127.0.0.1</strong><br />
+<strong>Port: 8080</strong></p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/foxy_configuration.png" alt="foxy_configuration" /></p>
+
+<p>Setelah siap konfigurasi, Foxy Proxy sudah siap digunakan bersama Burp Suite, Jadi kita boleh hidupkan Burp Suite. Kita akan mulakan pintasan (intercept) di bahagian “Proxy” di mana intercept akan berada dalam keadaan “off”.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/proxy_off.png" alt="intercept_off" /></p>
+
+<p>Untuk contoh pertama, kita akan intercept http request untuk melihat inti pati yang terkandung di dalam http GET request. Hidupkan Burp Suite proxy di Foxy Proxy dengan memilih setting yang telah kita konfigurasi sebentar tadi.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/select_proxy.png" alt="select_proxy" /></p>
+
+<p>Di Burp Suite hidupkan intercept dengan menekan “intercept off”, butang ini akan berubah kepada “intercept on”</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/intercept_on.png" alt="intercept_on" /></p>
+
+<p>Seterusnya, layari atau lakukan request terhadap website yang ingin kita intercept. Contoh di bawah, saya melayari website “www.example.com”. Apabila kita melakukan request seperti melayari atau memuat semula (refresh) website, Burp Suite akan intercept request dari kita ke web server. Hasilnya, http request yang cuba dihantar akan ditahan di Burp Suite.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/intercept_req.png" alt="intercept_request" /></p>
+
+<p>Pada masa ini kita boleh mengedit http request yang cuba dihantar ke web server. Pelbagai perkara yang boleh dilakukan di http header yang sering kali digunakan dalam penetration testing untuk menguji tindak balas website terhadap request yang dihantar.</p>
+
+<p>Jika kita ingin menghantar semula request yang telah di intercept kepada web server, kita hanya perlu menekan butang forward di bahagian atas request box. Request akan dihantar ke web server dan data yang dihantar akan diterima oleh web server dan dipaparkan kembali di browser.</p>
+
+<p><img src="/assets/images/blog/cara-guna-burpsuite/forward_req.png" alt="forward_request" /></p>
+
+<p>Selain forward, terdapat 3 butang utama yang sering digunakan.</p>
+
+<p><strong>Forward: Menyalurkan kembali request ke web server</strong><br />
+<strong>Drop: Membatalkan penghantaran request ke web server, jadi web server tidak akan menirima data yang dihantar.</strong><br />
+<strong>Action: Beberapa perkara yang boleh dilakukan kepada request untuk tindakan selanjutnya.</strong></p>
+
+<hr />]]></content><author><name>Amir Zulkarnain</name></author><category term="tutorial" /><category term="pentest" /><category term="tutorial" /><summary type="html"><![CDATA[]]></summary></entry></feed>
